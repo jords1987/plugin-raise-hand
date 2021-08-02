@@ -3,24 +3,14 @@ import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import workerHand from "./worker-hand";
 
-import { Actions } from '../../states/worker-hand';
+import { Actions } from "../../states/worker-hand";
 
-export interface StateToProps {
-    isRaised: boolean,
-}
+export interface StateToProps {}
 
-export interface DispatchToProps {
-    raiseHand: () => void,
-    lowerHand: () => void,
-}
+export interface DispatchToProps {}
 
-const mapStateToProps = (state: AppState): StateToProps => ({   
-  isRaised: state[namespace].workerHand.isRaised,
-});
+const mapStateToProps = (state: AppState): StateToProps => ({});
 
-const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchToProps => ({
-  raiseHand: bindActionCreators(Actions.rasieHand, dispatch),
-  lowerHand: bindActionCreators(Actions.lowerHand, dispatch),
-});
+const mapDispatchToProps = (dispatch: Dispatch<any>): DispatchToProps => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(workerHand);

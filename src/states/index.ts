@@ -2,7 +2,6 @@ import { AppState as FlexAppState } from '@twilio/flex-ui';
 import workerHand from 'components/worker-hand/worker-hand';
 import { combineReducers, Action as ReduxAction } from 'redux';
 
-import { CustomTaskListState, reduce as CustomTaskListReducer } from './CustomTaskListState';
 import { WorkerHandState, reduce as workerHandReducer } from './worker-hand';
 
 // Register your redux store under a unique namespace
@@ -17,7 +16,6 @@ export interface Action extends ReduxAction {
 export interface AppState {
   flex: FlexAppState;
   'raise-hand': {
-    customTaskList: CustomTaskListState;
     workerHand: WorkerHandState;
     // Other states
   };
@@ -25,6 +23,5 @@ export interface AppState {
 
 // Combine the reducers
 export default combineReducers({
-  customTaskList: CustomTaskListReducer,
   workerHand: workerHandReducer
 });

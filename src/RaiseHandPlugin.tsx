@@ -1,8 +1,8 @@
 import React from 'react';
 import * as Flex from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
+import { ColumnDefinition } from "@twilio/flex-ui";
 
-import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
 import reducers, { namespace } from './states';
 
 import WorkerHand from './components/worker-hand/worker-hand.container'
@@ -24,10 +24,12 @@ export default class RaiseHandPlugin extends FlexPlugin {
   init(flex: typeof Flex, manager: Flex.Manager) {
     this.registerReducers(manager);
 
-    flex.MainHeader.Content.add(<WorkerHand key="worker-hand"/>, {
+    flex.MainHeader.Content.add(<WorkerHand key="worker-hand" worker={manager.workerClient} syncClient={manager.insightsClient} canInteract={true}/>, {
       sortOrder: -1,
       align: 'end'
     });
+
+    flex.WorkersDataTable.Content.add(<ColumnDefinition key="agent-hand-custom" header={""} content={item => <WorkerHand key={`worker-${item.worker.sid}-hand`} worker={item.worker} syncClient={manager.insightsClient} canInteract={false}/>}/>, {sortOrder:0});
 
   }
 
