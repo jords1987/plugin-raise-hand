@@ -24,12 +24,12 @@ export default class RaiseHandPlugin extends FlexPlugin {
   init(flex: typeof Flex, manager: Flex.Manager) {
     this.registerReducers(manager);
 
-    flex.MainHeader.Content.add(<WorkerHand key="worker-hand" worker={manager.workerClient} syncClient={manager.insightsClient} canInteract={true}/>, {
+    flex.MainHeader.Content.add(<WorkerHand key="worker-hand" worker={manager.workerClient} syncClient={manager.insightsClient} />, {
       sortOrder: -1,
       align: 'end'
     });
 
-    flex.WorkersDataTable.Content.add(<ColumnDefinition key="agent-hand-custom" header={""} content={item => <WorkerHand key={`worker-${item.worker.sid}-hand`} worker={item.worker} syncClient={manager.insightsClient} canInteract={false}/>}/>, {sortOrder:0});
+    flex.WorkersDataTable.Content.add(<ColumnDefinition key="agent-hand-custom" header={""} content={item => <WorkerHand key={`worker-${item.worker.sid}-hand`} worker={item.worker} syncClient={manager.insightsClient} />}/>, {sortOrder:0});
 
   }
 

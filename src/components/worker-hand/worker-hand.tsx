@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent, ReactEventHandler } from "react";
 import PanTool from "@material-ui/icons/PanTool";
 import PanToolOutlined from "@material-ui/icons/PanToolOutlined";
 import { StateToProps, DispatchToProps } from "./worker-hand.container";
@@ -9,7 +9,6 @@ import { SyncClient } from "twilio-sync";
 interface OwnProps {
   worker: Worker;
   syncClient: SyncClient;
-  canInteract: boolean;
 }
 
 interface WorkerHandState {
@@ -53,8 +52,8 @@ export default class workerHand extends React.Component<
     });
   };
 
-  handleRaiseHand = async () => {
-    if (!this.props.canInteract) return;
+  handleRaiseHand = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
 
     var syncDoc = await this.props.syncClient.document(
       this.workerHandStateDocName
@@ -65,8 +64,8 @@ export default class workerHand extends React.Component<
     syncDoc.update(docState);
   };
 
-  handleLowerHand = async () => {
-    if (!this.props.canInteract) return;
+  handleLowerHand = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
 
     var syncDoc = await this.props.syncClient.document(
       this.workerHandStateDocName
