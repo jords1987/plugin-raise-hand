@@ -5,6 +5,8 @@ import { FlexPlugin } from 'flex-plugin';
 import CustomTaskListContainer from './components/CustomTaskList/CustomTaskList.Container';
 import reducers, { namespace } from './states';
 
+import WorkerHand from './components/worker-hand/worker-hand.container'
+
 const PLUGIN_NAME = 'RaiseHandPlugin';
 
 export default class RaiseHandPlugin extends FlexPlugin {
@@ -22,11 +24,11 @@ export default class RaiseHandPlugin extends FlexPlugin {
   init(flex: typeof Flex, manager: Flex.Manager) {
     this.registerReducers(manager);
 
-    const options: Flex.ContentFragmentProps = { sortOrder: -1 };
-    flex.AgentDesktopView
-      .Panel1
-      .Content
-      .add(<CustomTaskListContainer key="RaiseHandPlugin-component" />, options);
+    flex.MainHeader.Content.add(<WorkerHand key="worker-hand"/>, {
+      sortOrder: -1,
+      align: 'end'
+    });
+
   }
 
   /**

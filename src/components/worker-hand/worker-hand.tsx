@@ -1,6 +1,8 @@
 import React from "react";
+import PanTool from "@material-ui/icons/PanTool";
+import PanToolOutlined from "@material-ui/icons/PanToolOutlined";
 import { StateToProps, DispatchToProps } from "./worker-hand.container";
-import { WorkerHandStyles } from "./worker.hand.styles";
+import { WorkerHandStyles, StyledIconButton } from "./worker.hand.styles";
 
 interface OwnProps {}
 
@@ -9,6 +11,24 @@ type Props = StateToProps & DispatchToProps & OwnProps;
 
 export default class workerHand extends React.Component<Props> {
   render() {
-    return <WorkerHandStyles></WorkerHandStyles>;
+    return (
+      <WorkerHandStyles>
+        {this.props.isRaised ? (
+          <StyledIconButton
+            onClick={this.props.lowerHand}
+            aria-label="raisedHand"
+          >
+            <PanTool />
+          </StyledIconButton>
+        ) : (
+          <StyledIconButton
+            onClick={this.props.raiseHand}
+            aria-label="loweredHand"
+          >
+            <PanToolOutlined />
+          </StyledIconButton>
+        )}
+      </WorkerHandStyles>
+    );
   }
 }
