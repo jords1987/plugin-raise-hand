@@ -1,26 +1,27 @@
-Lets create our template plugin using the twilio CLI
+# Worker Hand Plugin
+This plugin adds the ability for an agent to raise thier hand to gain the attention of the supervisors on the supervisor panel. The supervisor also has the ability to lower the agents hand.
 
+![](./img/supervisor.gif)
+
+This plugin was built in my 2 part blog post (https://jords1987.github.io/), please read for further information on how to build your  own version.
+
+## Get up and running
+Make sure you have [Node.js](https://nodejs.org) as well as [`npm`](https://npmjs.com). Twilio CLI supports Node >= 10.12 (and recommend the _even_ versions of Node).
+
+1. Install the Twilio CLI following the instruction on the [Twilio CLI Quickstart
+](https://www.twilio.com/docs/twilio-cli/quickstart)
+2. Install the Flex Plugin CLI following the instructions on the [Install Flex Plugins CLI
+](https://www.twilio.com/docs/flex/developer/plugins/cli/install)
+3. Install dependencies 
+```bash
+npm install 
 ```
-twilio flex:plugins:create raise-hand --install --typescript`
+4. Select (or add) your Twilio Flex project to the Twilio CLI 
+```bash
+$ twilio profiles:use
 ```
-
-I like to leave the default CustomTaskList component that the template comes with in the folder structure until we have completed development of our component. This often comes in handy to refer back to.
-
-My idea for this feature is to give the agent a button to press that will 'raise their hand' so with that lets create our first custom component which will add this functionality
-
-we can create the following files/folders:
-components
+5. Deploy the plugin 
+```bash 
+$ twilio flex:plugins:deploy 
 ```
-|src
-    |- components
-        |- worker-hand
-            |- worker-hand.tsx
-            |- worker-hand.styles.ts
-            |- worker-hand.container.ts
-    |- states
-        |- worker-hand.ts
-```
-
-we can now put all of the boilerplate code into these files, I wont include all of that here, but you can see from [this commit](https://test.com) what I did.
-
-With that, we can now add our first pieces of functional code to the component. This is going to be the state of the workers hand, we could add this state at a component level, however I decided to add this to the redux store. This is so that we can easily extend our components functionality by interacting with the component state from other areas within flex (such as the [Flex Actions Framework](https://www.twilio.com/docs/flex/developer/ui/actions))
+6. Follow the instructions provided by the `deploy` command to create a release
